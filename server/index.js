@@ -1,7 +1,9 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
+const dotenv = require("dotenv").config();
 const path = require("path");
-const port = process.env.PORT || 1234;
+const port = process.env.PORT;
 
 app.get("/", (req, res) => {
     res.send("testing")
@@ -12,4 +14,12 @@ app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-app.listen(port, ()=>{console.log(`Listening on port: ${port}`)});
+// connect to db
+mongoose.connect(process.env.MONGO)
+    .then(() => {
+        // listen for requests after connecting
+        app.listen(port, ()=>{console.log(`Listening on port: ${port}`)});
+    })
+    .catch((error => {
+        console.log(error);
+    }))
