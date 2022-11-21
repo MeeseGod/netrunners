@@ -10,12 +10,12 @@ const userRouter = require("./routes/users");
 //     res.send("testing")
 // })
 
-app.use("/", userRouter);
+app.use("/api/users", userRouter);
 
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req,res) =>{
+//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
 // connect to db
 mongoose.connect(process.env.MONGO)
