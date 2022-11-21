@@ -4,10 +4,13 @@ const app = express();
 const dotenv = require("dotenv").config();
 const path = require("path");
 const port = process.env.PORT;
+const userRouter = require("./routes/users");
 
-app.get("/", (req, res) => {
-    res.send("testing")
-})
+// app.get("/", (req, res) => {
+//     res.send("testing")
+// })
+
+app.use("/", userRouter);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{
@@ -22,4 +25,5 @@ mongoose.connect(process.env.MONGO)
     })
     .catch((error => {
         console.log(error);
-    }))
+    }));
+
