@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
     const [users, setUsers] = useState(null);
@@ -18,6 +19,7 @@ export default function Home() {
     return (
       <div className="Home">
         <h1>Netrunners Home</h1>
+        <Navbar/>
         <div>
             {users && users.map((user) => (
                 <p key={`key${user.username}`}>{user.username}</p>
