@@ -1,6 +1,11 @@
+import Navbar from "../components/Navbar";
+
 export default function Login(){
     return (
         <div>
+            <div>
+                <Navbar/>
+            </div>
             <div>
                 <form action="/api/users/login" method="post">
                     <label for="username">Username</label>
