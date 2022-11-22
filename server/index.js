@@ -1,21 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const app = express();
 const dotenv = require("dotenv").config();
-const path = require("path");
+const mongoose = require("mongoose");
 const port = process.env.PORT;
 const userRouter = require("./routes/users");
 
-// app.get("/", (req, res) => {
-//     res.send("testing")
-// })
-
+// Calls on the userRouter routes.
 app.use("/api/users", userRouter);
-
-// Handles any requests that don't match the ones above
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
-// });
 
 // connect to db
 mongoose.connect(process.env.MONGO)

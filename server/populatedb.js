@@ -2,14 +2,6 @@
 
 console.log('This script populates some test items to our database.');
 
-// Get arguments passed on command line
-var userArgs = process.argv.slice(2);
-/*
-if (!userArgs[0].startsWith('mongodb')) {
-    console.log('ERROR: You need to specify a valid mongodb URL as the first argument');
-    return
-}
-*/
 const async = require('async');
 const dotenv = require("dotenv").config();
 const bcrypt = require("bcryptjs");
@@ -19,10 +11,12 @@ const mongoDB = process.env.MONGO;
 
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+const db = mongoose.connection;
+
+// Console log if we have an error connecting to our MongoDB
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-let users = []
+let users = [];
 
 function userCreate(username, password, isAdmin, cb) {
     bcrypt.hash(password, 10, (err, hashedpassword) => {
@@ -43,8 +37,7 @@ function userCreate(username, password, isAdmin, cb) {
     });
   
     });
-}
-
+};
 
 function createUsers(cb) {
   async.series([
@@ -56,11 +49,13 @@ function createUsers(cb) {
     },
   ],
   cb)
-}
+};
 
+// Goes through creation functions
 async.series([
     createUsers,
 ],
+
 // Optional callback
 function(err, results) {
     if (err) {
