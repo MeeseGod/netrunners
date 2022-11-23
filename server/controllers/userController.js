@@ -8,6 +8,13 @@ const getUsers = async (req, res) => {
     res.status(200).json(users);
 }
 
+const getCurrentUser = async (req, res) => {
+    const user = req.user;
+    if(req.user){
+        res.send(user);
+    }
+}
+
 const postLogin = passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/"
@@ -15,5 +22,6 @@ const postLogin = passport.authenticate("local", {
 
 module.exports = {
     getUsers,
+    getCurrentUser,
     postLogin,
 }

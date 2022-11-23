@@ -2,28 +2,26 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
-    const [users, setUsers] = useState(null);
+    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            const response = await fetch("/api/users");
+        const getCurrentUser = async () => {
+            const response = await fetch("/api/users/currentUser");
             const json = await response.json();
             if(response.ok){
-                setUsers(json);
+                setCurrentUser(json);
             }
-        };
-
-        fetchUsers();
+        }
+        getCurrentUser();
     }, []) 
+
 
     return (
       <div className="Home">
         <h1>Netrunners Home</h1>
         <Navbar/>
         <div>
-            {users && users.map((user) => (
-                <p key={`key${user.username}`}>{user.username}</p>
-            ))}
+            {currentUser ? currentUser.username : null}
         </div>
       </div>
     );
