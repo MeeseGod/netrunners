@@ -7,6 +7,7 @@ const MissionSchema = new Schema({
     missionType: {type: String, required: true},
     difficulty: {type: String, required: true},
     timeToComplete: {type: Number, required: true},
+    isComplete: {type: Boolean, required: true},
 }, { timestamps: true });
 
 module.exports = mongoose.model("Mission", MissionSchema);
