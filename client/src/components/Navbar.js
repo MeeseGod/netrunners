@@ -27,7 +27,7 @@ export default function Navbar(){
                 <Link to={"/"}>Home</Link>
             </div>
             <div>
-                {currentUser ? currentUser.username : null}
+                {currentUser ? currentUser.getUsername() : null}
                 {currentUser ? null : <Link to={"/login"}>Login</Link>}
                 {currentUser ? <button onClick={() => {logout()}}>Logout</button>: null}
             </div>

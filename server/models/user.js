@@ -9,13 +9,13 @@ const UserSchema = new Schema({
 }, { timestamps: true });
 
 UserSchema
-    .virtual('url')
+    .virtual("url")
     .get(function(){
         return `/user/${this._id}`;
 });
 
 UserSchema
-  .virtual('getUsername')
+  .virtual("getUsername")
   .get(function(){
     return this.username
 });
