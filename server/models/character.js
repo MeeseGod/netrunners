@@ -11,9 +11,9 @@ const CharacterSchema = new Schema({
     inventory: [
          { type: Schema.Types.ObjectId, ref: "Item" }
     ],
-    // equipped: [
-    //     { type: Schema.Types.ObjectId, ref: "Item" }
-    // ],
+    equipped: [
+        { type: Schema.Types.ObjectId, ref: "Item" }
+    ],
     // missions: [
     //     { type: Schema.Types.ObjectId, ref: "Mission" }
     // ],

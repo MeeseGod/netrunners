@@ -20,7 +20,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 let characters = [];
 let items = [];
 
-function characterCreate(level, neededExperience, currentExperience, currency, stats, inventory, cb) {
+function characterCreate(level, neededExperience, currentExperience, currency, stats, inventory, equipped, cb) {
     const character = new Character ({
         level: level,
         neededExperience: neededExperience,
@@ -28,6 +28,7 @@ function characterCreate(level, neededExperience, currentExperience, currency, s
         currency: currency,
         stats: stats,
         inventory: inventory,
+        equipped: equipped,
     });
        
     character.save(function (err) {
@@ -72,8 +73,11 @@ function createCharacters(cb) {
             },
             [
                 items[0],
-            ]
-        , callback)
+            ],
+            [
+                // Equipped
+            ],
+            callback)
     },
   ],
   cb)
@@ -111,7 +115,7 @@ function(err, results) {
         console.log('FINAL ERR: '+err);
     }
     else {
-        console.log("Success");
+        console.log("Successfully populated DB");
     };
     // All done, disconnect from database
     mongoose.connection.close();
