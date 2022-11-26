@@ -7,18 +7,16 @@ const CharacterSchema = new Schema({
     neededExperience: {type: Number, required: true},
     currentExperience: {type: Number, required: true},
     currency: {type: Number, required: true},
-    stats: [
-        {type: Schema.Types.Mixed, required: true}
-    ],
+    stats: {type: Schema.Types.Mixed, required: true},
     inventory: [
-        { type: Schema.Types.ObjectId, ref: "Item" }
+         { type: Schema.Types.ObjectId, ref: "Item" }
     ],
-    equipment: [
-        { type: Schema.Types.ObjectId, ref: "Item" }
-    ],
-    missions: [
-        { type: Schema.Types.ObjectId, ref: "Mission" }
-    ],
+    // equipped: [
+    //     { type: Schema.Types.ObjectId, ref: "Item" }
+    // ],
+    // missions: [
+    //     { type: Schema.Types.ObjectId, ref: "Mission" }
+    // ],
     
 }, { timestamps: true });
 

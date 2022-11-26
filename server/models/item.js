@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
     name: {type: String, required: true},
     rarity: {type: String, required: true},
     slot: {type: String, required: true},
-    bonuses: [{type: String, required: true}],
+    bonuses: {type: Schema.Types.Mixed, required: true},
     value: {type: Number, required: true},
     isEquipped: {type: Boolean, required: true},
 }, { timestamps: true });
