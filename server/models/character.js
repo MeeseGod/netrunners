@@ -14,10 +14,9 @@ const CharacterSchema = new Schema({
     equipped: [
         { type: Schema.Types.ObjectId, ref: "Item" }
     ],
-    // missions: [
-    //     { type: Schema.Types.ObjectId, ref: "Mission" }
-    // ],
-    
+    missions: [
+        { type: Schema.Types.ObjectId, ref: "Mission" }
+    ],
 }, { timestamps: true });
 
 module.exports = mongoose.model("Character", CharacterSchema);

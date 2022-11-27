@@ -7,6 +7,7 @@ const dotenv = require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const Character = require('./models/character');
 const Item = require("./models/item");
+const Mission = require("./models/mission");
 const mongoose = require('mongoose');
 const mongoDB = process.env.MONGO;
 
@@ -19,6 +20,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 let characters = [];
 let items = [];
+let missions = [];
 
 function characterCreate(level, neededExperience, currentExperience, currency, stats, inventory, equipped, cb) {
     const character = new Character ({
@@ -63,6 +65,27 @@ function itemCreate(name, rarity, slot, bonuses, value, isEquipped, cb){
     });
 };
 
+function missionCreate(title, missionType, difficulty, isStarted, timeToComplete, isComplete, cb){
+    const mission = new Mission({
+        title: title,
+        missionType: missionType,
+        difficulty: difficulty,
+        isStarted: isStarted,
+        timeToComplete: timeToComplete,
+        isComplete: isComplete,
+    });
+
+    mission.save(function(err){
+        if(err){
+            cb(err, null);
+            return;
+        };
+        console.log("New Mission: " + mission);
+        missions.push(mission)
+        cb(null, mission)
+    });
+}
+
 function createCharacters(cb) {
   async.series([
     function(callback) {
@@ -103,10 +126,28 @@ function createItems(cb){
     cb)
 };
 
+function createMissions(cb){
+    async.series([
+        function(callback){
+            missionCreate(
+                "Hack the World",
+                "Hacking",
+                "Easy",
+                false,
+                600,
+                false,
+                callback
+            )
+        }
+    ],
+    cb)
+}
+
 // Goes through creation functions
 async.series([
     createItems,
     createCharacters,
+    createMissions,
 ],
 
 // Optional callback
