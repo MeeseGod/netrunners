@@ -84,7 +84,7 @@ function missionCreate(title, missionType, difficulty, isStarted, timeToComplete
         missions.push(mission)
         cb(null, mission)
     });
-}
+};
 
 function createCharacters(cb) {
   async.series([
@@ -99,6 +99,9 @@ function createCharacters(cb) {
             ],
             [
                 // Equipped
+            ],
+            [
+                missions[0],
             ],
             callback)
     },
@@ -141,13 +144,13 @@ function createMissions(cb){
         }
     ],
     cb)
-}
+};
 
 // Goes through creation functions
 async.series([
     createItems,
-    createCharacters,
     createMissions,
+    createCharacters,
 ],
 
 // Optional callback
