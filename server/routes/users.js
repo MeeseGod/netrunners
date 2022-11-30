@@ -4,6 +4,9 @@ const userController = require("../controllers/userController");
 
 router.get("/", userController.getUsers);
 
+// Get user's character
+router.get("/getCharacter", userController.getCharacter);
+
 // Get user login page
 router.get("/currentUser", userController.getCurrentUser);
 

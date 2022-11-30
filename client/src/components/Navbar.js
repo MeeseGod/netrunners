@@ -11,13 +11,15 @@ export default function Navbar(){
     };
 
     useEffect(() => {
-        const getCurrentUser = async () => {
+        const getCurrentUser = async() => {
             const response = await fetch("/api/users/currentUser");
             const json = await response.json();
             if(response.ok){
+                console.log(json);
                 setCurrentUser(json);
             };
         };
+        
         getCurrentUser();
     }, []); 
 

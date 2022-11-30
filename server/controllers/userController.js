@@ -1,10 +1,25 @@
 const Users = require("../models/user");
+const Character = require("../models/character");
+const Item = require("../models/item");
+const Mission = require("../models/mission");
 const passport = require("passport");
+
+// Get logged in user's character
+const getCharacter = async (req, res) => {
+    if(req.user){
+        const character = await Character.findById(req.user.character);
+        console.log(character)
+        res.send(character);
+    };
+};
 
 // Get logged in User
 const getCurrentUser = async (req, res) => {
     const user = req.user;
+
     if(req.user){
+        // const currentUser = await Users.find({username: req.user.username})
+        // .populate("character")
         res.send(user);
     }
 }
@@ -31,8 +46,9 @@ const userLogout = (req, res, next) => {
 }
 
 module.exports = {
-    getUsers,
+    getCharacter,
     getCurrentUser,
+    getUsers,
     postLogin,
     userLogout,
 }
