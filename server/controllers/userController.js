@@ -21,14 +21,14 @@ const getCurrentUser = async (req, res) => {
         // const currentUser = await Users.find({username: req.user.username})
         // .populate("character")
         res.send(user);
-    }
-}
+    };
+};
 
 // Get all users in our DB
 const getUsers = async (req, res) => {
     const users = await Users.find({}).sort({createdAt: -1});
     res.status(200).json(users);
-}
+};
 
 // Confirm or reject login
 const postLogin = passport.authenticate("local", {
@@ -39,11 +39,11 @@ const postLogin = passport.authenticate("local", {
 const userLogout = (req, res, next) => {
     req.logout(function(err){
         if(err){
-            return next(err)
-        }
+            return next(err);
+        };
     res.redirect("/");
-    })
-}
+    });
+};
 
 module.exports = {
     getCharacter,
@@ -51,4 +51,4 @@ module.exports = {
     getUsers,
     postLogin,
     userLogout,
-}
+};

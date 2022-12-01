@@ -8,14 +8,15 @@ export default function Home() {
   useEffect(()=>{
     const getCharacter = async() => { 
       const characterRequest = await fetch("/api/users/getCharacter");
-      const json = await characterRequest.json()
+      const json = await characterRequest.json();
       if(characterRequest.ok){
+        console.log(json);
         setUserCharacter(json);
       };
     };
-
+    
     getCharacter();
-  },[])
+  },[]);
 
 
   return (
