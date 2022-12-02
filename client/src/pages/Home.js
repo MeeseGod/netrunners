@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import Missions from "../components/Missions";
 
 export default function Home() {
 
@@ -14,7 +15,6 @@ export default function Home() {
         setUserCharacter(json);
       };
     };
-    
     getCharacter();
   },[]);
 
@@ -24,6 +24,9 @@ export default function Home() {
       <h1>Netrunners Home</h1>
       <button onClick={() => {console.log(userCharacter)}}>Character</button>
       <Navbar/>
+      <div>
+        <Missions/>
+      </div>
     </div>
   );
 };

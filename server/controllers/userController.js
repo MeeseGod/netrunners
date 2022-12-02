@@ -8,7 +8,7 @@ const passport = require("passport");
 const getCharacter = async (req, res) => {
     if(req.user){
         const character = await Character.findById(req.user.character);
-        console.log(character)
+        console.log(character);
         res.send(character);
     };
 };
@@ -16,7 +16,6 @@ const getCharacter = async (req, res) => {
 // Get logged in User
 const getCurrentUser = async (req, res) => {
     const user = req.user;
-
     if(req.user){
         // const currentUser = await Users.find({username: req.user.username})
         // .populate("character")
