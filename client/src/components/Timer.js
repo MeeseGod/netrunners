@@ -3,8 +3,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-export default function Timer(){
-  const [seconds, setSeconds] = useState(20);
+export default function Timer(props){
+  const [seconds, setSeconds] = useState(props.time);
 
   useEffect(() => {
     seconds > 0 && setTimeout(() => setSeconds(seconds - 1), 1000);

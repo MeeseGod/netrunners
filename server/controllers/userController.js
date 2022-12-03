@@ -7,8 +7,11 @@ const passport = require("passport");
 // Get logged in user's character
 const getCharacter = async (req, res) => {
     if(req.user){
-        const character = await Character.findById(req.user.character);
+        const character = await Character.findById(req.user.character)
+        .populate("missions")
+        .populate("inventory");
         console.log(character);
+        // console.log(character.missions[0].toString());
         res.send(character);
     };
 };
