@@ -7,6 +7,8 @@ const MissionSchema = new Schema({
     missionType: {type: String, required: true},
     difficulty: {type: String, required: true},
     isStarted: {type: Boolean, required: true},
+    startTime: {type: Number, required: true},
+    endTime: {type: Number, required: true},
     timeToComplete: {type: Number, required: true},
     isComplete: {type: Boolean, required: true},
 }, { timestamps: true });
