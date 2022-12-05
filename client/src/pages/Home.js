@@ -12,7 +12,6 @@ export default function Home() {
       const characterRequest = await fetch("/api/users/getCharacter");
       const json = await characterRequest.json();
       if(characterRequest.ok){
-        console.log(json.missions);
         setUserCharacter(json);
         setCharacterMissions(json.missions);
       };
@@ -29,7 +28,7 @@ export default function Home() {
       {userCharacter ?
         <div>
           {characterMissions.map((mission) => {
-            return <Mission key={mission._id}/>
+            return <Mission key={mission._id} mission={mission}/>
           })}
         </div> :
         <div> 

@@ -90,13 +90,12 @@ function itemCreate(name, rarity, slot, bonuses, value, isEquipped, cb){
     });
 };
 
-function missionCreate(title, missionType, difficulty, isStarted, startTime, endTime, timeToComplete, isComplete, cb){
+function missionCreate(title, missionType, difficulty, isStarted, endTime, timeToComplete, isComplete, cb){
     const mission = new Mission({
         title: title,
         missionType: missionType,
         difficulty: difficulty,
         isStarted: isStarted,
-        startTime: startTime,
         endTime: endTime,
         timeToComplete: timeToComplete,
         isComplete: isComplete,
@@ -173,7 +172,6 @@ function createCharacters(cb) {
                   "Hacking",
                   "Easy",
                   false,
-                  0,
                   0,
                   6000,
                   false,
