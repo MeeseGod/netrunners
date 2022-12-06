@@ -11,6 +11,7 @@ const port = process.env.PORT;
 const session = require("express-session");
 const User = require("./models/user");
 const userRouter = require("./routes/users");
+const missionRouter = require("./routes/missions");
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -61,8 +62,11 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Calls on the userRouter routes.
+// Allows usage of userRouter routes.
 app.use("/api/users", userRouter);
+
+// Allows usage of missionRouter routes
+app.use("/api/missions", missionRouter);
 
 // error handler
 app.use(function(err, req, res, next) {
