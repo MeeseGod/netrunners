@@ -12,17 +12,16 @@ export default function Mission(props){
         return endTime - currentTime;
     };
 
-    function startMission(){
-        console.log("Start Mission");
+    function startMission(missionID){
+        console.log(missionID);
     };
-
-
+    
     return <div className="missionContainer">
         <h2>{mission.title}</h2>
         <div>
             {mission.isStarted
                 ? <Timer time={calculateTime()}/>
-                : <button onClick={() => {startMission()}}>Start Mission</button>
+                : <button onClick={() => {startMission(mission._id)}}>Start Mission</button>
             }
         </div>
 
