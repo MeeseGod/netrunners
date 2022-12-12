@@ -12,7 +12,26 @@ export default function Mission(props){
         return endTime - currentTime;
     };
 
-    function startMission(missionID){
+    async function startMission(missionID){
+        await fetch("/api/missions/startMission", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify({
+                missionID: missionID,
+            })
+        }).then(response => {
+            if(!response.ok){
+                throw new Error("Failed to start mission");
+            }
+        }).catch(console.error)
+        
         console.log(missionID);
     };
     
