@@ -15,7 +15,7 @@ const startMission = [
             await Mission.findByIdAndUpdate(req.body.missionID, 
                 {
                     isStarted: true,
-                    timeToComplete: (Date.now() + 6000),
+                    endTime: (Date.now() + 6000),
                 }
             );
             res.status(200)

@@ -2,11 +2,11 @@ import Timer from "../components/Timer";
 
 export default function Mission(props){
     const mission = props.mission;
-    // console.log(props.mission);
+    console.log(props.mission);
 
     function calculateTime(){
-        const currentTime = Date.now() / 1000;
-        const endTime = (Date.now() + 60000) / 1000;
+        const currentTime = (Date.now() / 1000);
+        const endTime = (mission.endTime / 1000);
         // Will be used when endTimes are properly implemented
         // const endTime = mission.endTime / 1000;
         return endTime - currentTime;
@@ -32,16 +32,31 @@ export default function Mission(props){
             }
         }).catch(console.error)
         
-        console.log(missionID);
+        // console.log(missionID);
     };
+
+    function displayMission(){
+        if(mission.isStarted){
+            if(calculateTime() < 0){
+                return <div>Complete</div>
+            }
+            else{
+                return <Timer time={calculateTime()}/>
+            }
+        }
+        else{
+            <button onClick={() => {startMission(mission._id)}}>Start Mission</button>
+        }
+    }
     
     return <div className="missionContainer">
         <h2>{mission.title}</h2>
         <div>
-            {mission.isStarted
+            {/* {mission.isStarted
                 ? <Timer time={calculateTime()}/>
                 : <button onClick={() => {startMission(mission._id)}}>Start Mission</button>
-            }
+            } */}
+            {displayMission()}
         </div>
 
     </div>
