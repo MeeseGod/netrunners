@@ -23,6 +23,51 @@ const startMission = [
     }
 ]
 
+const completeMission = [
+    async (req, res, next) => {
+       if(req.user){
+            const itemRarity = await determineItemRarity();
+            const itemType = await determineItemType();
+       }
+    }
+]
+
+// Non Exports
+async function determineItemRarity(){
+    const itemRarity = Math.floor(Math.random() * 100) + 1;
+        if(itemRarity < 51){
+            return "common"
+        }
+        else if(itemRarity){
+            return "uncommon"
+        }
+        else if(itemRarity){
+            return "rare"
+        }
+        else{
+            return "legendary"
+        };
+};
+
+async function determineItemType(){
+    const itemType = Math.floor(Math.random() * 100) + 1;
+        if(itemType < 25){
+            const itemSlot = Math.floor(Math.random() * 100) + 1;
+            if(itemSlot > 50){
+                return "Headwear";
+            }
+            else{
+                return "Body";
+            };
+        }
+        else if(itemType > 15 && itemType < 36){
+            return "Weapon";
+        }
+        else{
+            return "Bionic";
+        };
+};
+
 
 module.exports = {
     startMission
