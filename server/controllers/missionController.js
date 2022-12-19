@@ -28,6 +28,26 @@ const completeMission = [
        if(req.user){
             const itemRarity = await determineItemRarity();
             const itemType = await determineItemType();
+            const currencyInc = await determineCurrency(req.body.missionDifficulty);
+
+            const rewardItem = Item.findOne(
+                {
+                    rarity: itemRarity,
+                    slot: itemType,
+                }
+            );
+            
+            await Users.updateOne(
+                {_id: req.user._id},
+                {
+                    $push: {inventory: rewardItem},
+                    $inc:{currency: currencyInc}
+                
+                }
+            );
+            
+
+
        }
     }
 ]
@@ -66,6 +86,21 @@ async function determineItemType(){
         else{
             return "Bionic";
         };
+};
+
+async function determineCurrency(difficulty){
+    if(difficulty === "Easy"){
+        return 100;
+    }
+    else if(difficulty === "Medium"){
+        return 200;
+    }
+    else if(difficulty === "Hard"){
+        return 300;
+    }
+    else{
+        return 500;
+    };
 };
 
 
