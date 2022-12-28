@@ -28,7 +28,9 @@ const completeMission = [
        if(req.user){
             const itemRarity = await determineItemRarity();
             const itemType = await determineItemType();
-            const currencyInc = await determineCurrency(req.body.missionDifficulty);
+            const valueInc = await determineRewardValue(req.body.missionDifficulty);
+            const experienceChange = await determineExperience(valueInc, req.user.Character);
+
 
             const rewardItem = Item.findOne(
                 {
@@ -41,7 +43,7 @@ const completeMission = [
                 {_id: req.user._id},
                 {
                     $push: {inventory: rewardItem},
-                    $inc:{currency: currencyInc}
+                    $inc:{currency: valueInc}
                 
                 }
             );
@@ -88,7 +90,7 @@ async function determineItemType(){
         };
 };
 
-async function determineCurrency(difficulty){
+async function determineRewardValue(difficulty){
     if(difficulty === "Easy"){
         return 100;
     }
@@ -102,6 +104,21 @@ async function determineCurrency(difficulty){
         return 500;
     };
 };
+
+async function determineExperience(reward, character){
+    let currentExperience = character.currentExperience;
+    let neededExperience = character.neededExperience;
+    let level = character.level;
+
+    while(currentExperience + reward >= neededExperience){
+        reward = reward - neededExperience;
+        level++;
+        neededExperience = neededExperience * 1.5;
+    }
+
+    currentExperience = currentExperience + reward;
+    reward = 0;
+}
 
 
 module.exports = {
