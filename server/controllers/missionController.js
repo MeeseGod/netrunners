@@ -29,7 +29,8 @@ const completeMission = [
             const itemRarity = await determineItemRarity();
             const itemType = await determineItemType();
             const valueInc = await determineRewardValue(req.body.missionDifficulty);
-            const experienceChange = await determineExperience(valueInc, req.user.Character);
+
+            await determineExperience(valueInc, req.user.Character);
 
 
             const rewardItem = Item.findOne(
@@ -105,7 +106,8 @@ async function determineRewardValue(difficulty){
     };
 };
 
-async function determineExperience(reward, character){
+async function determineExperience(reward, characterID){
+    const character = await Character.findById(characterID); 
     let currentExperience = character.currentExperience;
     let neededExperience = character.neededExperience;
     let level = character.level;
@@ -118,6 +120,14 @@ async function determineExperience(reward, character){
 
     currentExperience = currentExperience + reward;
     reward = 0;
+
+    await Character.findByIdAndUpdate(characterID, 
+        {
+            level: level,
+            currentExperience: currentExperience,
+            neededExperience: neededExperience,
+        }
+    );
 }
 
 

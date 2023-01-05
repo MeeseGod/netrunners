@@ -10,7 +10,7 @@ const getCharacter = async (req, res) => {
         const character = await Character.findById(req.user.character)
         .populate("missions")
         .populate("inventory");
-        // console.log(character);
+        console.log(character);
         // console.log(character.missions[0].toString());
         res.send(character);
     };
