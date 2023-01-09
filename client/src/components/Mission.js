@@ -35,10 +35,37 @@ export default function Mission(props){
         // console.log(missionID);
     };
 
+    async function completeMission(missionID, missionDifficulty){
+        await fetch("/api/missions/completeMission", {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify({
+                missionID: missionID,
+                missionDifficulty: missionDifficulty,
+            })
+        }).then(response => {
+            if(!response.ok){
+                throw new Error("Failed to complete mission");
+            }
+        }).catch(console.error)
+        
+        // console.log(missionID);
+    }
+
     function displayMission(){
         if(mission.isStarted){
             if(calculateTime() < 0){
-                return <div>Complete</div>
+                return <div>
+                    Complete
+                    <button onClick={() => {completeMission(mission._id, mission.difficulty)}}>Complete Mission</button>
+                </div>
             }
             else{
                 return <Timer time={calculateTime()}/>
