@@ -61,6 +61,7 @@ export default function Mission(props){
 
     function displayMission(){
         if(mission.isStarted){
+            console.log(mission)
             if(calculateTime() < 0){
                 return <div>
                     Complete

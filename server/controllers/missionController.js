@@ -30,7 +30,9 @@ const completeMission = [
             const itemType = await determineItemType();
             const valueInc = await determineRewardValue(req.body.missionDifficulty);
 
-            await determineExperience(valueInc, req.user.Character);
+            console.log(req.user.character)
+
+            await determineExperience(valueInc, req.user.character);
 
 
             const rewardItem = Item.findOne(
@@ -105,6 +107,7 @@ async function determineRewardValue(difficulty){
 
 async function determineExperience(reward, characterID){
     const character = await Character.findById(characterID); 
+    console.log(character);
     let currentExperience = character.currentExperience;
     let neededExperience = character.neededExperience;
     let level = character.level;
@@ -129,5 +132,6 @@ async function determineExperience(reward, characterID){
 
 
 module.exports = {
-    startMission
+    startMission,
+    completeMission
 };
